@@ -88,7 +88,12 @@
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        
+        <!-- JDG Remote Client Libraries (7.1) -->
+        <version.org.infinispan>8.4.0.Final-redhat-2</version.org.infinispan>
+        
     </properties>
+   
 
     <dependencyManagement>
         <dependencies>
@@ -108,6 +113,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            
+            <!-- JDG DEPENDENCIES -->
+            <dependency>
+                <groupId>org.infinispan</groupId>
+                <artifactId>infinispan-bom</artifactId>
+                <version>${version.org.infinispan}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>            
         </dependencies>
     </dependencyManagement>
 
@@ -133,6 +147,13 @@
             <groupId>org.jboss.spec.javax.ws.rs</groupId>
             <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
             <scope>provided</scope>
+        </dependency>
+        
+        <!-- JDG DEPENDENCIES -->
+        <!-- Import the Infinispan client hotrod -->
+        <dependency>
+            <groupId>org.infinispan</groupId>
+            <artifactId>infinispan-remote</artifactId>
         </dependency>
     </dependencies>
 
