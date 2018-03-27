@@ -3,6 +3,7 @@ package com.redhat.consulting.lh.service;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import com.redhat.consulting.jdg.cache.GRID_NAMES;
 import com.redhat.consulting.jdg.domain.Incident;
 
 @Path("/api/incident")
+@ManagedBean
 public class IncidentsService {
 
 	@Inject 
