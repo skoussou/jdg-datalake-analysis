@@ -31,6 +31,9 @@ public class IncidentsService {
 	
 	//@PostConstruct
 	public IncidentsService() {
+		configuration = new RemoteCacheConfiguration();
+				configuration.initialize();
+				
 		cache = configuration.getCache(GRID_NAMES.LUFTHANSA_INCIDENTS.toString());
 	}
 	
