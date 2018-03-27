@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -15,16 +16,16 @@ import javax.ws.rs.QueryParam;
 
 import org.infinispan.client.hotrod.RemoteCache;
 
-import com.redhat.consulting.jdg.cache.CacheConfiguration;
+import com.redhat.consulting.jdg.cache.RemoteCacheConfiguration;
 import com.redhat.consulting.jdg.cache.GRID_NAMES;
 import com.redhat.consulting.jdg.domain.Incident;
 
 @Path("/api/incident")
-@ManagedBean
+@Model
 public class IncidentsService {
 
 	@Inject 
-	CacheConfiguration configuration;
+	RemoteCacheConfiguration configuration;
 	
 	private RemoteCache<String, Incident> cache;
 	
