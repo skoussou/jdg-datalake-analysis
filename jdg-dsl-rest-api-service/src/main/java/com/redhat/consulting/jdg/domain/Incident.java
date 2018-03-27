@@ -1,4 +1,4 @@
-package com.redhat.consulting.jdg.model.protobuf;
+package com.redhat.consulting.jdg.domain;
 
 import java.util.ArrayList;
 
@@ -10,19 +10,21 @@ import org.infinispan.protostream.annotations.ProtoMessage;
 //@ProtoDoc("@Indexed")
 public class Incident {
 	
-	String planeId;
-
+	ArrayList<String> planeIds;
+	
     //@ProtoDoc("@IndexedField(index = true, store = false)")
-	@ProtoDoc("repeated")
+	//@ProtoDoc("repeated")
     @ProtoField(number = 1, collectionImplementation = ArrayList.class, required = true)
-	public String getPlaneId() {
-		return planeId;
+	public ArrayList<String> getPlaneIds() {
+		return planeIds;
 	}
 
-	public void setPlaneId(String planeId) {
-		this.planeId = planeId;
+	public void addPlaneId(String planeId) {
+		this.planeIds.add(planeId);
 	}
 
-	
-	
+	@Override
+	public String toString() {
+		return "Incident [planeIds=" + planeIds + "]";
+	}
 }
