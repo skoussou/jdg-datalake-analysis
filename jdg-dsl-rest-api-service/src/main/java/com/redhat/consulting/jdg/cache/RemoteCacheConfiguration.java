@@ -24,7 +24,7 @@ public class RemoteCacheConfiguration implements CacheConfiguration {
 	
 	//@Inject
     //@SystemProperty(value = "cache.hotrod.hostname")
-    private String host;
+    private String host = "jdg-indexed-hotrod.jdg-querying.svc";
 
     //@Inject
     //@SystemProperty(value = "cache.hotrod.port", defaultValue = "11222")
