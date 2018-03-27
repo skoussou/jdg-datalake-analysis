@@ -12,7 +12,11 @@ public class Incident {
 	
 	ArrayList<String> planeIds;
 	
-    //@ProtoDoc("@IndexedField(index = true, store = false)")
+    public void setPlaneIds(ArrayList<String> planeIds) {
+		this.planeIds = planeIds;
+	}
+
+	//@ProtoDoc("@IndexedField(index = true, store = false)")
 	//@ProtoDoc("repeated")
     @ProtoField(number = 1, collectionImplementation = ArrayList.class, required = true)
 	public ArrayList<String> getPlaneIds() {
