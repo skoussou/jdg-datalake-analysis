@@ -13,12 +13,15 @@ import org.infinispan.client.hotrod.marshall.ProtoStreamMarshaller;
 import org.infinispan.protostream.SerializationContext;
 import org.infinispan.protostream.annotations.ProtoSchemaBuilder;
 import org.infinispan.query.remote.client.ProtobufMetadataManagerConstants;
+import java.util.logging.Logger;
 
 import com.redhat.consulting.jdg.domain.Incident;
 
 @ApplicationScoped
 public class CacheConfiguration {
 
+	private Logger log = Logger.getLogger(this.getClass().getName());
+	
 	//@Inject
     //@SystemProperty(value = "cache.hotrod.hostname")
     private String host;
@@ -39,7 +42,7 @@ public class CacheConfiguration {
     
     @PostConstruct
     public void initialize() {
-    	System.out.printf("Establishing cache manager for %s at %s:%s", username, host, port);
+    	log.info("Establishing cache manager for "+username+" at "+host+":"+port );
 
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.addServer()
@@ -55,7 +58,7 @@ public class CacheConfiguration {
                     .enable();
         cacheManager = new RemoteCacheManager(builder.build());
         
-        System.out.printf("Established cache manager for %s at %s:%s", username, host, port);
+        log.info("Established cache manager for "+username+" at "+host+":"+port );
 
         registerSchemasAndMarshallers();
     }
@@ -74,7 +77,7 @@ public class CacheConfiguration {
         	    .build(serCtx);
 
         	// the types can be marshalled now
-        	System.out.printf("Can marshal Incident.class now = %b", serCtx.canMarshall(Incident.class));
+        	log.info("Can marshal Incident.class now = "+serCtx.canMarshall(Incident.class) );
 //        	assertTrue(serCtx.canMarshall(Incident.class));
 //        	assertTrue(serCtx.canMarshall(Note.class));
 
@@ -91,8 +94,8 @@ public class CacheConfiguration {
             }        	
       
         } catch (IOException ioe) {
-        	System.out.println("Could not register marshallers! Remote querying is not going to work properly.");
-        	System.out.println(ioe);
+        	log.info("Could not register marshallers! Remote querying is not going to work properly.");
+        	log.info(ioe.getMessage());
         }
     }
     
