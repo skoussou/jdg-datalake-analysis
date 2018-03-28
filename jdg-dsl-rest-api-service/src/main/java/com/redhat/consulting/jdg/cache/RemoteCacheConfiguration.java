@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
 import org.infinispan.client.hotrod.RemoteCache;
@@ -15,16 +16,36 @@ import org.infinispan.protostream.annotations.ProtoSchemaBuilder;
 import org.infinispan.query.remote.client.ProtobufMetadataManagerConstants;
 import java.util.logging.Logger;
 
+import com.redhat.consulting.jdg.cache.listeners.EventLogListener;
 import com.redhat.consulting.jdg.domain.Incident;
 
 @ApplicationScoped
+@Model
 public class RemoteCacheConfiguration implements CacheConfiguration {
 
 	private Logger log = Logger.getLogger(this.getClass().getName());
 	
+//	//@Inject
+//    //@SystemProperty(value = "cache.hotrod.hostname")
+//    private String host = "jdg-indexed-hotrod.jdg-querying.svc";
+//
+//    //@Inject
+//    //@SystemProperty(value = "cache.hotrod.port", defaultValue = "11222")
+//    private String port = "11222";
+//
+//    //@Inject
+//    //@SystemProperty(value = "cache.username")
+//    private String username = "admin";
+//
+//    //@Inject
+//    //@SystemProperty(value = "cache.password")
+//    private String password = "redhat1!";
+//
+//    private RemoteCacheManager cacheManager;    
+    
 	//@Inject
     //@SystemProperty(value = "cache.hotrod.hostname")
-    private String host = "jdg-indexed-hotrod.jdg-querying.svc";
+    private String host = "127.0.0.1";
 
     //@Inject
     //@SystemProperty(value = "cache.hotrod.port", defaultValue = "11222")
@@ -38,8 +59,8 @@ public class RemoteCacheConfiguration implements CacheConfiguration {
     //@SystemProperty(value = "cache.password")
     private String password = "redhat1!";
 
-    private RemoteCacheManager cacheManager;    
-    
+    private RemoteCacheManager cacheManager;  
+	
     @PostConstruct
     public void initialize() {
     	log.info("Establishing cache manager for "+username+" at "+host+":"+port );
@@ -82,7 +103,7 @@ public class RemoteCacheConfiguration implements CacheConfiguration {
 //        	assertTrue(serCtx.canMarshall(Note.class));
 
         	// display the schema file
-        	System.out.println(incidentSchemaFile);
+        	log.info(incidentSchemaFile);
 
             // register the schemas with the server too
             RemoteCache<String, String> metadataCache = cacheManager.getCache(ProtobufMetadataManagerConstants.PROTOBUF_METADATA_CACHE_NAME);
@@ -102,11 +123,13 @@ public class RemoteCacheConfiguration implements CacheConfiguration {
     public RemoteCache getCache(String namedCache) {
     	if (namedCache == null) {
     		namedCache = "default";
-    		System.out.printf("Cache provided was null. So, Reaching out to <%s> cache.", namedCache);
+    		 log.info("Cache provided was null. So, Reaching out to "+namedCache+" cache.");
     	}
-		System.out.printf("Reaching out to <%s> cache.", namedCache);
-        return cacheManager.getCache("namedCache");
+    	 log.info("Reaching out to "+namedCache+" cache.\n");
+    	 log.info(("CACHE MANAGER null ="+ (cacheManager == null ? "true" : "false")));
+        return cacheManager.getCache(namedCache);
     }
+
     
 //    private String readResource(String resourcePath) throws IOException {
 //        try (InputStream is = getClass().getResourceAsStream(resourcePath)) {

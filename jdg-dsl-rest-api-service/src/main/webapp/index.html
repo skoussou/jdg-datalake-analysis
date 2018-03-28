@@ -32,10 +32,19 @@
     <p>LUFTHANSA API:
 
     <ul>
-    	<li><a href="rest/api/plane">Add Plane in Incident</a></li>
-    	<li><a href="rest/api/incident/">View Current Incidents</a></li>
-    	<li><a href="rest/api/incident/numbers">View Current Incident Numbers</a></li>
-    	<li><a href="rest/api/incident/keys">View Current Incident Types</a></li>    	
+    	<li><a href="rest/api/incident/plane">[PUT]] Add Plane in Incident</a></li>
+    	<li><a href="rest/api/incident/">[GET] View Current Incidents</a></li>
+    	<li><a href="rest/api/incident/numbers">[GET] View Current Incident Numbers</a></li>
+    	<li><a href="rest/api/incident/keys">[GET] View Current Incident Types</a></li>    	
+    	<li><a href="rest/api/incident/plane/{planeId}/search">[PUT] Search Incident Entries for Plane</a></li>    
+    	<li><a href="rest/api/incident/plane/{planeid}/stream">[GET] Stream Incident Types for Plane</a></li>    
+    	
+    		
+    	<li><a href="rest/api/incident/listener">[PUT]] Add Incident Listeners</a></li>
+    	<li><a href="rest/api/incident/listener">[DELETE]] Remove Incident Listeners</a></li>
+    	
+    	<li><a href="rest/api/incident/continuousQuery">[PUT]] Add Incident Continuous Query</a></li>
+    	<li><a href="rest/api/incident/continuousQuery">[DELETE]] Remove Incident Continuous Query</a></li>
 
     </ul>
 </body>
